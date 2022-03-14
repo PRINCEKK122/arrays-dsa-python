@@ -6,17 +6,17 @@ class Array:
         self.__count = 0
         self.__items: List[int] = []
 
-    def size(self) -> None:
-        print(self.__count)
+    def size(self) -> int:
+        return self.__count
 
-    def remove_at(self, index: int) -> None:
+    def remove_at(self, index: int) -> int:
         if index < 0 or index >= self.__count:
-            raise ValueError("Please provide a valid index!")
+            raise IndexError("Please provide a valid index!")
 
-        for i in range(index, self.__count - 1):
-            self.__items[i] = self.__items[i + 1]
-
-        self.__count -= 1
+        for i in range(0, self.__count):
+            if i == index:
+                self.__count -= 1
+                return self.__items[i]
 
     def intersect(self, another_array: List[int]) -> List[int]:
         common_elements: Set = set()
@@ -55,15 +55,15 @@ class Array:
     def max(self) -> int:
         largest_number = self.__items[0]
 
-        for current_number in self.__items:
-            if current_number > largest_number:
-                largest_number = current_number
+        for index in range(1, len(self.__items)):
+            if self.__items[index] >= largest_number:
+                largest_number = self.__items[index]
 
         return largest_number
 
     def insert_at(self, item: int, index: int) -> None:
         if index < 0 or index >= self.__count:
-            raise ValueError("Please provide a valid index!")
+            raise IndexError("Please provide a valid index!")
 
         self.__items.append(0)
         self.__count += 1
